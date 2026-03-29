@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>极智租 - 机器人租赁×内容营销</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #051C2C;
+            --primary-light: #0a2d44;
+            --accent: #006BA6;
+            --accent-orange: #D46A00;
+            --accent-green: #007A53;
+            --bg: #F5F7FA;
+            --card-bg: #FFFFFF;
+            --text: #1a1a1a;
+            --text-secondary: #666;
+            --text-muted: #999;
+            --border: #e8e8e8;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 24px rgba(0,0,0,0.12);
+            --safe-top: env(safe-area-inset-top);
+            --safe-bottom: env(safe-area-inset-bottom);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+        }
+
+        /* App Container */
+        .app {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            max-width: 430px;
+            margin: 0 auto;
+            background: var(--bg);
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 12px 16px;
+            padding-top: max(12px, var(--safe-top));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+        }
+
+        .header-logo {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 16px;
+        }
+
+        .header-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .main::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Banner */
+        .banner {
+            margin: 12px 16px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            height: 160px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            box-shadow: var(--shadow);
+        }
+
+        .banner-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+        }
+
+        .banner-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 8px;
+            width: fit-content;
+        }
+
+        .banner-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .banner-subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .banner-btn {
+            margin-top: 12px;
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            width: fit-content;
+        }
+
+        .banner-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+        }
+
+        .dot.active {
+            background: white;
+            width: 16px;
+            border-radius: 3px;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            padding: 8px 16px;
+            margin-bottom: 8px;
+        }
+
+        .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 12px 4px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .action-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .action-icon.blue { background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
+        .action-icon.purple { background: linear-gradient(135deg, #f3e5f5, #e1bee7); }
+        .action-icon.orange { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
+        .action-icon.green { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+
+        .action-text {
+            font-size: 12px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Section Title */
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            padding-bottom: 8px;
+        }
+
+        .section-title h2 {
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .section-title .more {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        /* Robot Cards */
+        .robot-list {
+            padding: 0 16px 16px;
+        }
+
+        .robot-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .robot-card:active {
+            transform: scale(0.98);
+        }
+
+        .robot-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--bg), #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            flex-shrink: 0;
+        }
+
+        .robot-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .robot-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .robot-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .robot-rating {
+            color: var(--accent-orange);
+            font-weight: 500;
+        }
+
+        .robot-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--bg);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .robot-price {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-top: 8px;
+        }
+
+        .price-symbol {
+            font-size: 12px;
+            color: var(--accent-orange);
+            font-weight: 500;
+        }
+
+        .price-value {
+            font-size: 20px;
+            color: var(--accent-orange);
+            font-weight: 700;
+        }
+
+        .price-unit {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .price-original {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            margin-left: 6px;
+        }
+
+        /* AI Content Section */
+        .ai-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0 16px 16px;
+            border-radius: 16px;
+            padding: 20px;
+            color: white;
+        }
+
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .ai-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .ai-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .ai-subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .ai-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .ai-feature {
+            background: rgba(255,255,255,0.15);
+            padding: 12px 8px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .ai-feature-icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .ai-feature-text {
+            font-size: 11px;
+            opacity: 0.95;
+        }
+
+        .ai-btn {
+            background: white;
+            color: #764ba2;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        /* Case Studies */
+        .case-list {
+            display: flex;
+            gap: 12px;
+            padding: 0 16px 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+
+        .case-list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .case-card {
+            flex: 0 0 280px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            scroll-snap-align: start;
+        }
+
+        .case-image {
+            height: 140px;
+            background: linear-gradient(135deg, var(--bg), #ddd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            position: relative;
+        }
+
+        .case-play {
+            position: absolute;
+            width: 44px;
+            height: 44px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .case-content {
+            padding: 14px;
+        }
+
+        .case-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .case-stats {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Detail Page */
+        .detail-header {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(135deg, var(--bg), #ddd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+        }
+
+        .detail-back {
+            position: absolute;
+            top: max(12px, var(--safe-top));
+            left: 16px;
+            width: 36px;
+            height: 36px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            z-index: 10;
+        }
+
+        .detail-content {
+            background: var(--card-bg);
+            border-radius: 24px 24px 0 0;
+            margin-top: -24px;
+            padding: 24px 16px;
+            position: relative;
+        }
+
+        .detail-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .detail-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .detail-price-box {
+            background: linear-gradient(135deg, #fff8f0, #fff3e0);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .detail-price {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .detail-price-value {
+            font-size: 32px;
+            color: var(--accent-orange);
+            font-weight: 700;
+        }
+
+        .detail-price-unit {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .detail-price-original {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            margin-left: 8px;
+        }
+
+        .detail-promo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--accent-orange);
+        }
+
+        .detail-section {
+            margin-bottom: 24px;
+        }
+
+        .detail-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--bg);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+        }
+
+        .feature-text {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .date-selector {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .date-selector::-webkit-scrollbar {
+            display: none;
+        }
+
+        .date-item {
+            flex: 0 0 60px;
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .date-item.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .date-day {
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .date-num {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .detail-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px 16px;
+            padding-bottom: max(12px, var(--safe-bottom));
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+            max-width: 430px;
+            margin: 0 auto;
+        }
+
+        .detail-footer-price {
+            flex: 1;
+        }
+
+        .detail-footer-label {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .detail-footer-value {
+            font-size: 24px;
+            color: var(--accent-orange);
+            font-weight: 700;
+        }
+
+        .detail-footer-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 24px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* AI Factory Page */
+        .ai-factory-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px 16px;
+            padding-top: max(20px, var(--safe-top));
+            color: white;
+        }
+
+        .ai-factory-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .ai-factory-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .ai-tools {
+            padding: 20px 16px;
+        }
+
+        .ai-tool-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .ai-tool-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .ai-tool-icon.script { background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
+        .ai-tool-icon.clip { background: linear-gradient(135deg, #f3e5f5, #e1bee7); }
+        .ai-tool-icon.live { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
+        .ai-tool-icon.template { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+
+        .ai-tool-info {
+            flex: 1;
+        }
+
+        .ai-tool-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .ai-tool-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .ai-tool-arrow {
+            font-size: 20px;
+            color: var(--text-muted);
+        }
+
+        /* Template Gallery */
+        .template-section {
+            padding: 0 16px 20px;
+        }
+
+        .template-categories {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+        }
+
+        .template-categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .template-category {
+            flex: 0 0 auto;
+            padding: 8px 16px;
+            background: var(--bg);
+            border-radius: 20px;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .template-category.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .template-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .template-image {
+            height: 100px;
+            background: linear-gradient(135deg, var(--bg), #ddd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .template-info {
+            padding: 12px;
+        }
+
+        .template-name {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .template-views {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Profile Page */
+        .profile-header {
+            background: var(--primary);
+            padding: 30px 16px;
+            padding-top: max(30px, var(--safe-top));
+            color: white;
+        }
+
+        .profile-user {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .profile-avatar {
+            width: 70px;
+            height: 70px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+
+        .profile-info h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .profile-info p {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .profile-stat {
+            text-align: center;
+        }
+
+        .profile-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .profile-stat-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .profile-menu {
+            padding: 20px 16px;
+        }
+
+        .menu-group {
+            background: var(--card-bg);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        .menu-icon.blue { background: #e3f2fd; }
+        .menu-icon.orange { background: #fff3e0; }
+        .menu-icon.green { background: #e8f5e9; }
+        .menu-icon.purple { background: #f3e5f5; }
+        .menu-icon.red { background: #ffebee; }
+
+        .menu-text {
+            flex: 1;
+            font-size: 15px;
+        }
+
+        .menu-arrow {
+            font-size: 18px;
+            color: var(--text-muted);
+        }
+
+        /* Tab Bar */
+        .tab-bar {
+            display: flex;
+            background: white;
+            padding: 8px 0;
+            padding-bottom: max(8px, var(--safe-bottom));
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+        }
+
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 4px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .tab-item.active {
+            color: var(--primary);
+        }
+
+        .tab-icon {
+            font-size: 24px;
+        }
+
+        .tab-text {
+            font-size: 11px;
+        }
+
+        /* Utilities */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-16 {
+            margin-top: 16px;
+        }
+
+        .mb-16 {
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <span>📍</span>
+                <span>杭州市 ▼</span>
+            </div>
+            <div class="header-logo">极智租</div>
+            <div class="header-right">
+                <div class="header-icon">🔍</div>
+                <div class="header-icon">💬</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main">
+            <!-- Home Page -->
+            <div class="page active" id="page-home">
+                <!-- Banner -->
+                <div class="banner">
+                    <div class="banner-content">
+                        <div class="banner-tag">🎉 限时特惠</div>
+                        <div class="banner-title">1元闪租机器人</div>
+                        <div class="banner-subtitle">新用户首单专享 · 春节活动持续中</div>
+                        <button class="banner-btn">立即抢购 →</button>
+                    </div>
+                    <div class="banner-dots">
+                        <div class="dot active"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <div class="action-item" onclick="showPage('detail')">
+                        <div class="action-icon blue">🤖</div>
+                        <div class="action-text">机器人租赁</div>
+                    </div>
+                    <div class="action-item" onclick="showPage('ai')">
+                        <div class="action-icon purple">🎬</div>
+                        <div class="action-text">AI内容</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-icon orange">📋</div>
+                        <div class="action-text">场景方案</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-icon green">🤝</div>
+                        <div class="action-text">加盟合作</div>
+                    </div>
+                </div>
+
+                <!-- AI Content Section -->
+                <div class="ai-section" onclick="showPage('ai')">
+                    <div class="ai-header">
+                        <div class="ai-icon">✨</div>
+                        <div>
+                            <div class="ai-title">AI内容工厂</div>
+                            <div class="ai-subtitle">让机器人帮你带来流量</div>
+                        </div>
+                    </div>
+                    <div class="ai-features">
+                        <div class="ai-feature">
+                            <div class="ai-feature-icon">📝</div>
+                            <div class="ai-feature-text">智能脚本</div>
+                        </div>
+                        <div class="ai-feature">
+                            <div class="ai-feature-icon">🎬</div>
+                            <div class="ai-feature-text">自动剪辑</div>
+                        </div>
+                        <div class="ai-feature">
+                            <div class="ai-feature-icon">📺</div>
+                            <div class="ai-feature-text">数字人直播</div>
+                        </div>
+                    </div>
+                    <button class="ai-btn">立即体验 AI 创作 →</button>
+                </div>
+
+                <!-- Robot List -->
+                <div class="section-title">
+                    <h2>🔥 热门机器人</h2>
+                    <div class="more">更多 ></div>
+                </div>
+
+                <div class="robot-list">
+                    <div class="robot-card" onclick="showPage('detail')">
+                        <div class="robot-image">🤖</div>
+                        <div class="robot-info">
+                            <div>
+                                <div class="robot-name">宇树G1 人形机器人</div>
+                                <div class="robot-meta">
+                                    <span class="robot-rating">⭐ 4.9</span>
+                                    <span>已租2300+次</span>
+                                </div>
+                                <div class="robot-tags">
+                                    <span class="tag">迎宾</span>
+                                    <span class="tag">表演</span>
+                                    <span class="tag">互动</span>
+                                </div>
+                            </div>
+                            <div class="robot-price">
+                                <span class="price-symbol">¥</span>
+                                <span class="price-value">2,999</span>
+                                <span class="price-unit">/天</span>
+                                <span class="price-original">¥3,999</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="robot-card">
+                        <div class="robot-image" style="background: linear-gradient(135deg, #f0f0f0, #e0e0e0);">🦿</div>
+                        <div class="robot-info">
+                            <div>
+                                <div class="robot-name">优必选Walker X</div>
+                                <div class="robot-meta">
+                                    <span class="robot-rating">⭐ 4.8</span>
+                                    <span>已租1800+次</span>
+                                </div>
+                                <div class="robot-tags">
+                                    <span class="tag">讲解</span>
+                                    <span class="tag">导览</span>
+                                    <span class="tag">服务</span>
+                                </div>
+                            </div>
+                            <div class="robot-price">
+                                <span class="price-symbol">¥</span>
+                                <span class="price-value">3,999</span>
+                                <span class="price-unit">/天</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="robot-card">
+                        <div class="robot-image" style="background: linear-gradient(135deg, #fff8f0, #ffe8d6);">🐕</div>
+                        <div class="robot-info">
+                            <div>
+                                <div class="robot-name">宇树Go2 机器狗</div>
+                                <div class="robot-meta">
+                                    <span class="robot-rating">⭐ 4.7</span>
+                                    <span>已租1200+次</span>
+                                </div>
+                                <div class="robot-tags">
+                                    <span class="tag">巡游</span>
+                                    <span class="tag">互动</span>
+                                </div>
+                            </div>
+                            <div class="robot-price">
+                                <span class="price-symbol">¥</span>
+                                <span class="price-value">1,299</span>
+                                <span class="price-unit">/天</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Studies -->
+                <div class="section-title">
+                    <h2>✨ 成功案例</h2>
+                    <div class="more">更多 ></div>
+                </div>
+
+                <div class="case-list">
+                    <div class="case-card">
+                        <div class="case-image">
+                            🍲
+                            <div class="case-play">▶</div>
+                        </div>
+                        <div class="case-content">
+                            <div class="case-title">杭州XX火锅店开业</div>
+                            <div class="case-stats">
+                                <span>▶ 23万播放</span>
+                                <span>👥 引流500+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-image" style="background: linear-gradient(135deg, #f0f0f0, #e8e8e8);">
+                            🏢
+                            <div class="case-play">▶</div>
+                        </div>
+                        <div class="case-content">
+                            <div class="case-title">上海展会现场</div>
+                            <div class="case-stats">
+                                <span>▶ 15万播放</span>
+                                <span>👥 留资300+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-image" style="background: linear-gradient(135deg, #fff0f5, #ffe4ed);">
+                            💒
+                            <div class="case-play">▶</div>
+                        </div>
+                        <div class="case-content">
+                            <div class="case-title">浪漫婚礼现场</div>
+                            <div class="case-stats">
+                                <span>▶ 8万播放</span>
+                                <span>👥 咨询200+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="height: 20px;"></div>
+            </div>
+
+            <!-- Detail Page -->
+            <div class="page" id="page-detail">
+                <div class="detail-header">
+                    <div class="detail-back" onclick="showPage('home')">←</div>
+                    🤖
+                </div>
+
+                <div class="detail-content">
+                    <div class="detail-title">宇树G1 人形机器人</div>
+                    <div class="detail-meta">
+                        <span class="robot-rating">⭐ 4.9分</span>
+                        <span>2300+次租赁</span>
+                        <span>15个城市可租</span>
+                    </div>
+
+                    <div class="detail-price-box">
+                        <div class="detail-price">
+                            <span class="detail-price-value">¥2,999</span>
+                            <span class="detail-price-unit">/天</span>
+                            <span class="detail-price-original">¥3,999</span>
+                        </div>
+                        <div class="detail-promo">
+                            <span>🎁</span>
+                            <span>限时优惠：送AI视频制作服务</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <div class="detail-section-title">📋 功能介绍</div>
+                        <div class="feature-grid">
+                            <div class="feature-item">
+                                <div class="feature-icon">👋</div>
+                                <div class="feature-text">智能迎宾</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🎭</div>
+                                <div class="feature-text">舞蹈表演</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">💬</div>
+                                <div class="feature-text">语音互动</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">📸</div>
+                                <div class="feature-text">合影打卡</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <div class="detail-section-title">📅 选择租赁日期</div>
+                        <div class="date-selector">
+                            <div class="date-item">
+                                <div class="date-day">今天</div>
+                                <div class="date-num">29</div>
+                            </div>
+                            <div class="date-item active">
+                                <div class="date-day">明天</div>
+                                <div class="date-num">30</div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-day">周二</div>
+                                <div class="date-num">31</div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-day">周三</div>
+                                <div class="date-num">01</div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-day">周四</div>
+                                <div class="date-num">02</div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-day">周五</div>
+                                <div class="date-num">03</div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-day">周六</div>
+                                <div class="date-num">04</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <div class="detail-section-title">📹 实拍案例</div>
+                        <div class="case-list">
+                            <div class="case-card" style="flex: 0 0 200px;">
+                                <div class="case-image" style="height: 110px;">
+                                    🍲
+                                    <div class="case-play">▶</div>
+                                </div>
+                                <div class="case-content" style="padding: 10px;">
+                                    <div class="case-title" style="font-size: 12px;">火锅店开业</div>
+                                    <div class="case-stats" style="font-size: 11px;">
+                                        <span>▶ 50万播放</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="case-card" style="flex: 0 0 200px;">
+                                <div class="case-image" style="height: 110px; background: linear-gradient(135deg, #f0f0f0, #e8e8e8);">
+                                    🏢
+                                    <div class="case-play">▶</div>
+                                </div>
+                                <div class="case-content" style="padding: 10px;">
+                                    <div class="case-title" style="font-size: 12px;">展会现场</div>
+                                    <div class="case-stats" style="font-size: 11px;">
+                                        <span>▶ 30万播放</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="height: 80px;"></div>
+                </div>
+
+                <div class="detail-footer">
+                    <div class="detail-footer-price">
+                        <div class="detail-footer-label">合计</div>
+                        <div class="detail-footer-value">¥2,999</div>
+                    </div>
+                    <button class="detail-footer-btn">立即预约</button>
+                </div>
+            </div>
+
+            <!-- AI Factory Page -->
+            <div class="page" id="page-ai">
+                <div class="ai-factory-header">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <div class="detail-back" style="position: static; background: rgba(255,255,255,0.2);" onclick="showPage('home')">←</div>
+                    </div>
+                    <div class="ai-factory-title">✨ AI内容工厂</div>
+                    <div class="ai-factory-subtitle">AI驱动，让内容创作更简单</div>
+                </div>
+
+                <div class="ai-tools">
+                    <div class="ai-tool-card">
+                        <div class="ai-tool-icon script">📝</div>
+                        <div class="ai-tool-info">
+                            <div class="ai-tool-name">短视频脚本</div>
+                            <div class="ai-tool-desc">输入商家信息，AI自动生成爆款脚本</div>
+                        </div>
+                        <div class="ai-tool-arrow">›</div>
+                    </div>
+
+                    <div class="ai-tool-card">
+                        <div class="ai-tool-icon clip">🎬</div>
+                        <div class="ai-tool-info">
+                            <div class="ai-tool-name">智能剪辑</div>
+                            <div class="ai-tool-desc">上传素材，AI自动剪辑成片</div>
+                        </div>
+                        <div class="ai-tool-arrow">›</div>
+                    </div>
+
+                    <div class="ai-tool-card">
+                        <div class="ai-tool-icon live">📺</div>
+                        <div class="ai-tool-info">
+                            <div class="ai-tool-name">数字人直播</div>
+                            <div class="ai-tool-desc">7×24小时AI数字人自动直播</div>
+                        </div>
+                        <div class="ai-tool-arrow">›</div>
+                    </div>
+
+                    <div class="ai-tool-card">
+                        <div class="ai-tool-icon template">📦</div>
+                        <div class="ai-tool-info">
+                            <div class="ai-tool-name">爆款模板</div>
+                            <div class="ai-tool-desc">100+行业模板，一键套用</div>
+                        </div>
+                        <div class="ai-tool-arrow">›</div>
+                    </div>
+                </div>
+
+                <div class="template-section">
+                    <div class="section-title" style="padding-left: 0;">
+                        <h2>🎬 热门模板</h2>
+                    </div>
+
+                    <div class="template-categories">
+                        <div class="template-category active">全部</div>
+                        <div class="template-category">餐饮</div>
+                        <div class="template-category">开业</div>
+                        <div class="template-category">展会</div>
+                        <div class="template-category">婚庆</div>
+                        <div class="template-category">活动</div>
+                    </div>
+
+                    <div class="template-grid">
+                        <div class="template-card">
+                            <div class="template-image">🎉</div>
+                            <div class="template-info">
+                                <div class="template-name">开业宣传视频</div>
+                                <div class="template-views">预计播放 5-10万</div>
+                            </div>
+                        </div>
+                        <div class="template-card">
+                            <div class="template-image" style="background: linear-gradient(135deg, #fff8f0, #ffe8d6);">🍜</div>
+                            <div class="template-info">
+                                <div class="template-name">探店打卡视频</div>
+                                <div class="template-views">预计播放 3-8万</div>
+                            </div>
+                        </div>
+                        <div class="template-card">
+                            <div class="template-image" style="background: linear-gradient(135deg, #f0f8ff, #e0f0ff);">🏢</div>
+                            <div class="template-info">
+                                <div class="template-name">产品讲解视频</div>
+                                <div class="template-views">预计播放 2-5万</div>
+                            </div>
+                        </div>
+                        <div class="template-card">
+                            <div class="template-image" style="background: linear-gradient(135deg, #f5f0ff, #eee0ff);">🎊</div>
+                            <div class="template-info">
+                                <div class="template-name">活动预热视频</div>
+                                <div class="template-views">预计播放 3-6万</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="height: 80px;"></div>
+            </div>
+
+            <!-- Profile Page -->
+            <div class="page" id="page-profile">
+                <div class="profile-header">
+                    <div class="profile-user">
+                        <div class="profile-avatar">👤</div>
+                        <div class="profile-info">
+                            <h3>张老板</h3>
+                            <p>杭州XX餐饮 · 已租3次</p>
+                        </div>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <div class="profile-stat-value">3</div>
+                            <div class="profile-stat-label">租赁订单</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value">5</div>
+                            <div class="profile-stat-label">AI作品</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value">50万+</div>
+                            <div class="profile-stat-label">总播放量</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-menu">
+                    <div class="menu-group">
+                        <div class="menu-item">
+                            <div class="menu-icon blue">📋</div>
+                            <div class="menu-text">我的订单</div>
+                            <div class="menu-arrow">›</div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-icon purple">🎬</div>
+                            <div class="menu-text">我的AI作品</div>
+                            <div class="menu-arrow">›</div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-icon orange">💰</div>
+                            <div class="menu-text">优惠券</div>
+                            <div class="menu-arrow">›</div>
+                        </div>
+                    </div>
+
+                    <div class="menu-group">
+                        <div class="menu-item">
+                            <div class="menu-icon green">🤝</div>
+                            <div class="menu-text">成为合伙人</div>
+                            <div class="menu-arrow">›</div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-icon blue">📞</div>
+                            <div class="menu-text">联系客服</div>
+                            <div class="menu-arrow">›</div>
+                        </div>
+                    </div>
+
+                    <div class="menu-group">
+                        <div class="menu-item">
+                            <div class="menu-icon red">⚙️</div>
+                            <div class="menu-text">设置</div>
+                            <div class="menu-arrow">›</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="height: 40px;"></div>
+            </div>
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+            <div class="tab-item active" onclick="showPage('home')">
+                <div class="tab-icon">🏠</div>
+                <div class="tab-text">首页</div>
+            </div>
+            <div class="tab-item" onclick="showPage('ai')">
+                <div class="tab-icon">✨</div>
+                <div class="tab-text">AI创作</div>
+            </div>
+            <div class="tab-item">
+                <div class="tab-icon">➕</div>
+                <div class="tab-text">发布</div>
+            </div>
+            <div class="tab-item">
+                <div class="tab-icon">💬</div>
+                <div class="tab-text">消息</div>
+            </div>
+            <div class="tab-item" onclick="showPage('profile')">
+                <div class="tab-icon">👤</div>
+                <div class="tab-text">我的</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Page navigation
+        function showPage(pageName) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show target page
+            document.getElementById('page-' + pageName).classList.add('active');
+            
+            // Update tab bar
+            document.querySelectorAll('.tab-item').forEach((tab, index) => {
+                tab.classList.remove('active');
+            });
+            
+            // Scroll to top
+            document.querySelector('.main').scrollTop = 0;
+            
+            // Update active tab based on page
+            if (pageName === 'home') {
+                document.querySelectorAll('.tab-item')[0].classList.add('active');
+            } else if (pageName === 'ai') {
+                document.querySelectorAll('.tab-item')[1].classList.add('active');
+            } else if (pageName === 'profile') {
+                document.querySelectorAll('.tab-item')[4].classList.add('active');
+            }
+        }
+
+        // Date selector interaction
+        document.querySelectorAll('.date-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.date-item').forEach(d => d.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Template category interaction
+        document.querySelectorAll('.template-category').forEach(cat => {
+            cat.addEventListener('click', function() {
+                document.querySelectorAll('.template-category').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Banner auto-slide
+        let currentBanner = 0;
+        const banners = [
+            { tag: '🎉 限时特惠', title: '1元闪租机器人', subtitle: '新用户首单专享 · 春节活动持续中', bg: 'linear-gradient(135deg, #051C2C 0%, #006BA6 100%)' },
+            { tag: '🎬 AI内容', title: 'AI帮你做爆款视频', subtitle: '智能脚本+自动剪辑，轻松获客', bg: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' },
+            { tag: '🤝 加盟合作', title: '成为城市合伙人', subtitle: '轻资产创业，共享机器人红利', bg: 'linear-gradient(135deg, #D46A00 0%, #ff8c00 100%)' }
+        ];
+
+        function updateBanner() {
+            currentBanner = (currentBanner + 1) % banners.length;
+            const banner = banners[currentBanner];
+            const bannerEl = document.querySelector('.banner');
+            const contentEl = document.querySelector('.banner-content');
+            
+            bannerEl.style.background = banner.bg;
+            contentEl.querySelector('.banner-tag').textContent = banner.tag;
+            contentEl.querySelector('.banner-title').textContent = banner.title;
+            contentEl.querySelector('.banner-subtitle').textContent = banner.subtitle;
+            
+            // Update dots
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentBanner);
+            });
+        }
+
+        setInterval(updateBanner, 4000);
+
+        // Touch feedback
+        document.querySelectorAll('.robot-card, .action-item, .ai-tool-card, .menu-item').forEach(el => {
+            el.addEventListener('touchstart', function() {
+                this.style.opacity = '0.7';
+            });
+            el.addEventListener('touchend', function() {
+                this.style.opacity = '1';
+            });
+        });
+
+        // Prevent default touch behavior for better scroll
+        document.addEventListener('touchmove', function(e) {
+            if (e.target.closest('.case-list') || e.target.closest('.template-categories') || e.target.closest('.date-selector')) {
+                return;
+            }
+        }, { passive: true });
+
+        console.log('🤖 极智租小程序Demo已加载');
+        console.log('📱 功能：首页、机器人详情、AI内容工厂、个人中心');
+        console.log('✨ 特色：AI脚本生成、智能剪辑、数字人直播');
+    </script>
+</body>
+</html>
