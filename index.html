@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>极智租 - 机器人租赁×内容营销</title>
+    <title>极智租 - 机器人租赁×AI内容营销</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -12,6 +12,8 @@
             --accent: #006BA6;
             --accent-orange: #D46A00;
             --accent-green: #007A53;
+            --accent-purple: #6B46C1;
+            --accent-pink: #C41E3A;
             --bg: #F5F7FA;
             --card-bg: #FFFFFF;
             --text: #1a1a1a;
@@ -39,7 +41,6 @@
             overflow: hidden;
         }
 
-        /* App Container */
         .app {
             height: 100%;
             display: flex;
@@ -50,7 +51,6 @@
             position: relative;
         }
 
-        /* Header */
         .header {
             background: var(--primary);
             color: white;
@@ -64,34 +64,11 @@
             z-index: 100;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-        }
+        .header-left { display: flex; align-items: center; gap: 6px; font-size: 14px; }
+        .header-logo { font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+        .header-right { display: flex; gap: 16px; }
+        .header-icon { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
 
-        .header-logo {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .header-right {
-            display: flex;
-            gap: 16px;
-        }
-
-        .header-icon {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        /* Main Content */
         .main {
             flex: 1;
             overflow-y: auto;
@@ -99,19 +76,8 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .main::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Page Sections */
-        .page {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .page.active {
-            display: block;
-        }
+        .page { display: none; animation: fadeIn 0.3s ease; }
+        .page.active { display: block; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -152,17 +118,8 @@
             width: fit-content;
         }
 
-        .banner-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .banner-subtitle {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-
+        .banner-title { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+        .banner-subtitle { font-size: 13px; opacity: 0.9; }
         .banner-btn {
             margin-top: 12px;
             background: white;
@@ -184,18 +141,8 @@
             gap: 6px;
         }
 
-        .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
-        }
-
-        .dot.active {
-            background: white;
-            width: 16px;
-            border-radius: 3px;
-        }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); }
+        .dot.active { background: white; width: 16px; border-radius: 3px; }
 
         /* Quick Actions */
         .quick-actions {
@@ -232,11 +179,7 @@
         .action-icon.orange { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
         .action-icon.green { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
 
-        .action-text {
-            font-size: 12px;
-            color: var(--text);
-            font-weight: 500;
-        }
+        .action-text { font-size: 12px; color: var(--text); font-weight: 500; }
 
         /* Section Title */
         .section-title {
@@ -264,9 +207,7 @@
         }
 
         /* Robot Cards */
-        .robot-list {
-            padding: 0 16px 16px;
-        }
+        .robot-list { padding: 0 16px 16px; }
 
         .robot-card {
             background: var(--card-bg);
@@ -279,9 +220,7 @@
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .robot-card:active {
-            transform: scale(0.98);
-        }
+        .robot-card:active { transform: scale(0.98); }
 
         .robot-image {
             width: 100px;
@@ -302,11 +241,7 @@
             justify-content: space-between;
         }
 
-        .robot-name {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
+        .robot-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
 
         .robot-meta {
             display: flex;
@@ -317,10 +252,7 @@
             margin-bottom: 8px;
         }
 
-        .robot-rating {
-            color: var(--accent-orange);
-            font-weight: 500;
-        }
+        .robot-rating { color: var(--accent-orange); font-weight: 500; }
 
         .robot-tags {
             display: flex;
@@ -343,32 +275,13 @@
             margin-top: 8px;
         }
 
-        .price-symbol {
-            font-size: 12px;
-            color: var(--accent-orange);
-            font-weight: 500;
-        }
+        .price-symbol { font-size: 12px; color: var(--accent-orange); font-weight: 500; }
+        .price-value { font-size: 20px; color: var(--accent-orange); font-weight: 700; }
+        .price-unit { font-size: 12px; color: var(--text-muted); }
+        .price-original { font-size: 12px; color: var(--text-muted); text-decoration: line-through; margin-left: 6px; }
 
-        .price-value {
-            font-size: 20px;
-            color: var(--accent-orange);
-            font-weight: 700;
-        }
-
-        .price-unit {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .price-original {
-            font-size: 12px;
-            color: var(--text-muted);
-            text-decoration: line-through;
-            margin-left: 6px;
-        }
-
-        /* AI Content Section */
-        .ai-section {
+        /* AI Service Section - NEW */
+        .ai-service-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             margin: 0 16px 16px;
             border-radius: 16px;
@@ -376,14 +289,14 @@
             color: white;
         }
 
-        .ai-header {
+        .ai-service-header {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 16px;
         }
 
-        .ai-icon {
+        .ai-service-icon {
             width: 40px;
             height: 40px;
             background: rgba(255,255,255,0.2);
@@ -394,41 +307,27 @@
             font-size: 20px;
         }
 
-        .ai-title {
-            font-size: 18px;
-            font-weight: 700;
-        }
+        .ai-service-title { font-size: 18px; font-weight: 700; }
+        .ai-service-subtitle { font-size: 12px; opacity: 0.9; }
 
-        .ai-subtitle {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-
-        .ai-features {
+        .ai-service-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-bottom: 16px;
         }
 
-        .ai-feature {
+        .ai-stat-item {
             background: rgba(255,255,255,0.15);
             padding: 12px 8px;
             border-radius: 10px;
             text-align: center;
         }
 
-        .ai-feature-icon {
-            font-size: 24px;
-            margin-bottom: 6px;
-        }
+        .ai-stat-value { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+        .ai-stat-label { font-size: 11px; opacity: 0.9; }
 
-        .ai-feature-text {
-            font-size: 11px;
-            opacity: 0.95;
-        }
-
-        .ai-btn {
+        .ai-service-btn {
             background: white;
             color: #764ba2;
             border: none;
@@ -439,6 +338,403 @@
             width: 100%;
         }
 
+        /* AI Content Factory Page - NEW DESIGN */
+        .ai-factory-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px 16px;
+            padding-top: max(20px, var(--safe-top));
+            color: white;
+        }
+
+        .ai-factory-nav {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .ai-factory-back {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-right: 12px;
+        }
+
+        .ai-factory-title { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+        .ai-factory-subtitle { font-size: 14px; opacity: 0.9; }
+
+        /* AI Service Cards */
+        .ai-services-grid {
+            padding: 20px 16px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .ai-service-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .ai-service-card:active { transform: scale(0.98); }
+
+        .ai-service-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .ai-service-card-icon.script { background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
+        .ai-service-card-icon.clip { background: linear-gradient(135deg, #f3e5f5, #e1bee7); }
+        .ai-service-card-icon.live { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
+        .ai-service-card-icon.digital { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+        .ai-service-card-icon.template { background: linear-gradient(135deg, #ffebee, #ffcdd2); }
+        .ai-service-card-icon.distribute { background: linear-gradient(135deg, #f3e5f5, #e1bee7); }
+
+        .ai-service-card-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+        .ai-service-card-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+        /* AI Script Generator Page */
+        .script-generator-page { background: var(--bg); min-height: 100%; }
+
+        .script-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 16px;
+            color: white;
+        }
+
+        .script-back-btn {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .script-title { font-size: 20px; font-weight: 700; }
+        .script-subtitle { font-size: 13px; opacity: 0.9; margin-top: 4px; }
+
+        .script-form {
+            padding: 20px 16px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 14px;
+            background: white;
+            font-family: inherit;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+        }
+
+        .script-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .script-option {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .script-option.active {
+            background: var(--accent-purple);
+            color: white;
+            border-color: var(--accent-purple);
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Generated Content Preview */
+        .generated-content {
+            margin-top: 20px;
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .generated-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .generated-title { font-size: 16px; font-weight: 600; }
+
+        .generated-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .generated-action-btn {
+            padding: 6px 12px;
+            background: var(--bg);
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .script-content {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .script-section {
+            margin-bottom: 16px;
+        }
+
+        .script-section-title {
+            font-weight: 600;
+            color: var(--accent-purple);
+            margin-bottom: 8px;
+        }
+
+        /* Live Streaming Page */
+        .live-page { background: var(--bg); min-height: 100%; }
+
+        .live-header {
+            background: linear-gradient(135deg, #D46A00 0%, #ff8c00 100%);
+            padding: 16px;
+            color: white;
+        }
+
+        .live-preview {
+            margin: 16px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .live-preview-video {
+            height: 200px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .live-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            border: 4px solid white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #ff4444;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .live-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .live-info {
+            padding: 16px;
+        }
+
+        .live-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .live-stats { display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary); }
+
+        .live-controls {
+            padding: 0 16px 16px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .live-control-btn {
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .live-control-btn.primary {
+            background: linear-gradient(135deg, #D46A00, #ff8c00);
+            color: white;
+        }
+
+        .live-control-btn.secondary {
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        /* Digital Human Templates */
+        .template-section { padding: 0 16px 16px; }
+
+        .template-categories {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+        }
+
+        .template-categories::-webkit-scrollbar { display: none; }
+
+        .template-category {
+            flex: 0 0 auto;
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 13px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .template-category.active {
+            background: var(--accent-purple);
+            color: white;
+            border-color: var(--accent-purple);
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .template-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+        }
+
+        .template-preview {
+            height: 120px;
+            background: linear-gradient(135deg, var(--bg), #ddd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            position: relative;
+        }
+
+        .template-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: var(--accent-purple);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+        }
+
+        .template-info { padding: 12px; }
+        .template-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .template-meta { font-size: 11px; color: var(--text-muted); }
+
         /* Case Studies */
         .case-list {
             display: flex;
@@ -448,9 +744,7 @@
             scroll-snap-type: x mandatory;
         }
 
-        .case-list::-webkit-scrollbar {
-            display: none;
-        }
+        .case-list::-webkit-scrollbar { display: none; }
 
         .case-card {
             flex: 0 0 280px;
@@ -484,22 +778,9 @@
             font-size: 18px;
         }
 
-        .case-content {
-            padding: 14px;
-        }
-
-        .case-title {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .case-stats {
-            display: flex;
-            gap: 12px;
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
+        .case-content { padding: 14px; }
+        .case-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+        .case-stats { display: flex; gap: 12px; font-size: 12px; color: var(--text-secondary); }
 
         /* Detail Page */
         .detail-header {
@@ -536,11 +817,7 @@
             position: relative;
         }
 
-        .detail-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
+        .detail-title { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
 
         .detail-meta {
             display: flex;
@@ -558,29 +835,10 @@
             margin-bottom: 20px;
         }
 
-        .detail-price {
-            display: flex;
-            align-items: baseline;
-            gap: 4px;
-        }
-
-        .detail-price-value {
-            font-size: 32px;
-            color: var(--accent-orange);
-            font-weight: 700;
-        }
-
-        .detail-price-unit {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        .detail-price-original {
-            font-size: 14px;
-            color: var(--text-muted);
-            text-decoration: line-through;
-            margin-left: 8px;
-        }
+        .detail-price { display: flex; align-items: baseline; gap: 4px; }
+        .detail-price-value { font-size: 32px; color: var(--accent-orange); font-weight: 700; }
+        .detail-price-unit { font-size: 14px; color: var(--text-muted); }
+        .detail-price-original { font-size: 14px; color: var(--text-muted); text-decoration: line-through; margin-left: 8px; }
 
         .detail-promo {
             display: flex;
@@ -591,9 +849,7 @@
             color: var(--accent-orange);
         }
 
-        .detail-section {
-            margin-bottom: 24px;
-        }
+        .detail-section { margin-bottom: 24px; }
 
         .detail-section-title {
             font-size: 16px;
@@ -604,11 +860,7 @@
             gap: 6px;
         }
 
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-        }
+        .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 
         .feature-item {
             display: flex;
@@ -628,10 +880,7 @@
             font-size: 26px;
         }
 
-        .feature-text {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
+        .feature-text { font-size: 12px; color: var(--text-secondary); }
 
         .date-selector {
             display: flex;
@@ -640,9 +889,7 @@
             padding-bottom: 8px;
         }
 
-        .date-selector::-webkit-scrollbar {
-            display: none;
-        }
+        .date-selector::-webkit-scrollbar { display: none; }
 
         .date-item {
             flex: 0 0 60px;
@@ -653,20 +900,9 @@
             cursor: pointer;
         }
 
-        .date-item.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        .date-day {
-            font-size: 12px;
-            margin-bottom: 4px;
-        }
-
-        .date-num {
-            font-size: 18px;
-            font-weight: 600;
-        }
+        .date-item.active { background: var(--primary); color: white; }
+        .date-day { font-size: 12px; margin-bottom: 4px; }
+        .date-num { font-size: 18px; font-weight: 600; }
 
         .detail-footer {
             position: fixed;
@@ -684,20 +920,9 @@
             margin: 0 auto;
         }
 
-        .detail-footer-price {
-            flex: 1;
-        }
-
-        .detail-footer-label {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .detail-footer-value {
-            font-size: 24px;
-            color: var(--accent-orange);
-            font-weight: 700;
-        }
+        .detail-footer-price { flex: 1; }
+        .detail-footer-label { font-size: 12px; color: var(--text-muted); }
+        .detail-footer-value { font-size: 24px; color: var(--accent-orange); font-weight: 700; }
 
         .detail-footer-btn {
             background: var(--primary);
@@ -707,142 +932,6 @@
             border-radius: 24px;
             font-size: 15px;
             font-weight: 600;
-        }
-
-        /* AI Factory Page */
-        .ai-factory-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px 16px;
-            padding-top: max(20px, var(--safe-top));
-            color: white;
-        }
-
-        .ai-factory-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .ai-factory-subtitle {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        .ai-tools {
-            padding: 20px 16px;
-        }
-
-        .ai-tool-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .ai-tool-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-        }
-
-        .ai-tool-icon.script { background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
-        .ai-tool-icon.clip { background: linear-gradient(135deg, #f3e5f5, #e1bee7); }
-        .ai-tool-icon.live { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
-        .ai-tool-icon.template { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
-
-        .ai-tool-info {
-            flex: 1;
-        }
-
-        .ai-tool-name {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .ai-tool-desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .ai-tool-arrow {
-            font-size: 20px;
-            color: var(--text-muted);
-        }
-
-        /* Template Gallery */
-        .template-section {
-            padding: 0 16px 20px;
-        }
-
-        .template-categories {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            margin-bottom: 16px;
-        }
-
-        .template-categories::-webkit-scrollbar {
-            display: none;
-        }
-
-        .template-category {
-            flex: 0 0 auto;
-            padding: 8px 16px;
-            background: var(--bg);
-            border-radius: 20px;
-            font-size: 13px;
-            white-space: nowrap;
-        }
-
-        .template-category.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        .template-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        .template-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .template-image {
-            height: 100px;
-            background: linear-gradient(135deg, var(--bg), #ddd);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-        }
-
-        .template-info {
-            padding: 12px;
-        }
-
-        .template-name {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .template-views {
-            font-size: 11px;
-            color: var(--text-muted);
         }
 
         /* Profile Page */
@@ -870,16 +959,8 @@
             font-size: 36px;
         }
 
-        .profile-info h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .profile-info p {
-            font-size: 13px;
-            opacity: 0.8;
-        }
+        .profile-info h3 { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+        .profile-info p { font-size: 13px; opacity: 0.8; }
 
         .profile-stats {
             display: grid;
@@ -890,24 +971,11 @@
             border-top: 1px solid rgba(255,255,255,0.1);
         }
 
-        .profile-stat {
-            text-align: center;
-        }
+        .profile-stat { text-align: center; }
+        .profile-stat-value { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+        .profile-stat-label { font-size: 12px; opacity: 0.8; }
 
-        .profile-stat-value {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .profile-stat-label {
-            font-size: 12px;
-            opacity: 0.8;
-        }
-
-        .profile-menu {
-            padding: 20px 16px;
-        }
+        .profile-menu { padding: 20px 16px; }
 
         .menu-group {
             background: var(--card-bg);
@@ -924,9 +992,7 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .menu-item:last-child {
-            border-bottom: none;
-        }
+        .menu-item:last-child { border-bottom: none; }
 
         .menu-icon {
             width: 36px;
@@ -945,15 +1011,8 @@
         .menu-icon.purple { background: #f3e5f5; }
         .menu-icon.red { background: #ffebee; }
 
-        .menu-text {
-            flex: 1;
-            font-size: 15px;
-        }
-
-        .menu-arrow {
-            font-size: 18px;
-            color: var(--text-muted);
-        }
+        .menu-text { flex: 1; font-size: 15px; }
+        .menu-arrow { font-size: 18px; color: var(--text-muted); }
 
         /* Tab Bar */
         .tab-bar {
@@ -975,40 +1034,154 @@
             transition: color 0.2s;
         }
 
-        .tab-item.active {
-            color: var(--primary);
+        .tab-item.active { color: var(--primary); }
+
+        .tab-icon { font-size: 24px; }
+        .tab-text { font-size: 11px; }
+
+        /* Content Distribution Page */
+        .distribution-page { background: var(--bg); min-height: 100%; }
+
+        .distribution-header {
+            background: linear-gradient(135deg, #007A53 0%, #00a86b 100%);
+            padding: 16px;
+            color: white;
         }
 
-        .tab-icon {
+        .platform-grid {
+            padding: 20px 16px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .platform-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px 8px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .platform-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 24px;
+            margin: 0 auto 8px;
         }
 
-        .tab-text {
-            font-size: 11px;
+        .platform-name { font-size: 12px; font-weight: 500; }
+        .platform-status { font-size: 11px; color: var(--accent-green); margin-top: 4px; }
+
+        /* One-click Publish Button */
+        .publish-section {
+            padding: 0 16px 20px;
         }
+
+        .publish-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #007A53, #00a86b);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Stats Dashboard */
+        .stats-dashboard {
+            padding: 20px 16px;
+        }
+
+        .stats-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 16px;
+        }
+
+        .stats-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .stats-card-title { font-size: 16px; font-weight: 600; }
+        .stats-card-period { font-size: 12px; color: var(--text-muted); }
+
+        .stats-numbers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .stats-number-item { text-align: center; }
+        .stats-number-value { font-size: 24px; font-weight: 700; color: var(--primary); }
+        .stats-number-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
 
         /* Utilities */
-        .hidden {
-            display: none !important;
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .mt-16 { margin-top: 16px; }
+        .mb-16 { margin-bottom: 16px; }
+
+        /* Loading Animation */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
         }
 
-        .text-center {
-            text-align: center;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
-        .mt-16 {
-            margin-top: 16px;
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--accent-green);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 1000;
+            display: none;
         }
 
-        .mb-16 {
-            margin-bottom: 16px;
+        .success-message.show { display: block; animation: fadeInOut 2s ease; }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
     </style>
 </head>
 <body>
+    <div class="success-message" id="success-msg">操作成功！</div>
+
     <div class="app">
         <!-- Header -->
-        <div class="header">
+        <div class="header" id="main-header">
             <div class="header-left">
                 <span>📍</span>
                 <span>杭州市 ▼</span>
@@ -1022,7 +1195,7 @@
 
         <!-- Main Content -->
         <div class="main">
-            <!-- Home Page -->
+            <!-- ==================== HOME PAGE ==================== -->
             <div class="page active" id="page-home">
                 <!-- Banner -->
                 <div class="banner">
@@ -1030,7 +1203,7 @@
                         <div class="banner-tag">🎉 限时特惠</div>
                         <div class="banner-title">1元闪租机器人</div>
                         <div class="banner-subtitle">新用户首单专享 · 春节活动持续中</div>
-                        <button class="banner-btn">立即抢购 →</button>
+                        <button class="banner-btn" onclick="showPage('detail')">立即抢购 →</button>
                     </div>
                     <div class="banner-dots">
                         <div class="dot active"></div>
@@ -1045,44 +1218,44 @@
                         <div class="action-icon blue">🤖</div>
                         <div class="action-text">机器人租赁</div>
                     </div>
-                    <div class="action-item" onclick="showPage('ai')">
+                    <div class="action-item" onclick="showPage('ai-factory')">
                         <div class="action-icon purple">🎬</div>
                         <div class="action-text">AI内容</div>
                     </div>
-                    <div class="action-item">
+                    <div class="action-item" onclick="showPage('solution')">
                         <div class="action-icon orange">📋</div>
                         <div class="action-text">场景方案</div>
                     </div>
-                    <div class="action-item">
+                    <div class="action-item" onclick="showPage('partner')">
                         <div class="action-icon green">🤝</div>
                         <div class="action-text">加盟合作</div>
                     </div>
                 </div>
 
-                <!-- AI Content Section -->
-                <div class="ai-section" onclick="showPage('ai')">
-                    <div class="ai-header">
-                        <div class="ai-icon">✨</div>
+                <!-- AI Service Section -->
+                <div class="ai-service-section" onclick="showPage('ai-factory')">
+                    <div class="ai-service-header">
+                        <div class="ai-service-icon">✨</div>
                         <div>
-                            <div class="ai-title">AI内容工厂</div>
-                            <div class="ai-subtitle">让机器人帮你带来流量</div>
+                            <div class="ai-service-title">AI内容营销服务</div>
+                            <div class="ai-service-subtitle">为机器人租赁商家打造爆款内容</div>
                         </div>
                     </div>
-                    <div class="ai-features">
-                        <div class="ai-feature">
-                            <div class="ai-feature-icon">📝</div>
-                            <div class="ai-feature-text">智能脚本</div>
+                    <div class="ai-service-stats">
+                        <div class="ai-stat-item">
+                            <div class="ai-stat-value">10万+</div>
+                            <div class="ai-stat-label">日均曝光</div>
                         </div>
-                        <div class="ai-feature">
-                            <div class="ai-feature-icon">🎬</div>
-                            <div class="ai-feature-text">自动剪辑</div>
+                        <div class="ai-stat-item">
+                            <div class="ai-stat-value">500+</div>
+                            <div class="ai-stat-label">日获客量</div>
                         </div>
-                        <div class="ai-feature">
-                            <div class="ai-feature-icon">📺</div>
-                            <div class="ai-feature-text">数字人直播</div>
+                        <div class="ai-stat-item">
+                            <div class="ai-stat-value">70%</div>
+                            <div class="ai-stat-label">成本降低</div>
                         </div>
                     </div>
-                    <button class="ai-btn">立即体验 AI 创作 →</button>
+                    <button class="ai-service-btn">立即体验 AI 创作 →</button>
                 </div>
 
                 <!-- Robot List -->
@@ -1116,7 +1289,7 @@
                         </div>
                     </div>
 
-                    <div class="robot-card">
+                    <div class="robot-card" onclick="showPage('detail')">
                         <div class="robot-image" style="background: linear-gradient(135deg, #f0f0f0, #e0e0e0);">🦿</div>
                         <div class="robot-info">
                             <div>
@@ -1139,7 +1312,7 @@
                         </div>
                     </div>
 
-                    <div class="robot-card">
+                    <div class="robot-card" onclick="showPage('detail')">
                         <div class="robot-image" style="background: linear-gradient(135deg, #fff8f0, #ffe8d6);">🐕</div>
                         <div class="robot-info">
                             <div>
@@ -1215,7 +1388,482 @@
                 <div style="height: 20px;"></div>
             </div>
 
-            <!-- Detail Page -->
+            <!-- ==================== AI FACTORY PAGE ==================== -->
+            <div class="page" id="page-ai-factory">
+                <div class="ai-factory-header">
+                    <div class="ai-factory-nav">
+                        <div class="ai-factory-back" onclick="showPage('home')">←</div>
+                        <div>
+                            <div class="ai-factory-title">✨ AI内容工厂</div>
+                            <div class="ai-factory-subtitle">为机器人租赁商家提供一站式内容营销解决方案</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-services-grid">
+                    <div class="ai-service-card" onclick="showPage('ai-script')">
+                        <div class="ai-service-card-icon script">📝</div>
+                        <div class="ai-service-card-title">AI脚本生成</div>
+                        <div class="ai-service-card-desc">输入商家信息，自动生成机器人推广短视频脚本</div>
+                    </div>
+
+                    <div class="ai-service-card" onclick="showPage('ai-clip')">
+                        <div class="ai-service-card-icon clip">🎬</div>
+                        <div class="ai-service-card-title">智能剪辑</div>
+                        <div class="ai-service-card-desc">上传机器人素材，AI自动剪辑成片，一键成片</div>
+                    </div>
+
+                    <div class="ai-service-card" onclick="showPage('ai-live')">
+                        <div class="ai-service-card-icon live">📺</div>
+                        <div class="ai-service-card-title">数字人直播</div>
+                        <div class="ai-service-card-desc">7×24小时AI数字人直播，机器人形象讲解带货</div>
+                    </div>
+
+                    <div class="ai-service-card" onclick="showPage('ai-digital')">
+                        <div class="ai-service-card-icon digital">🤖</div>
+                        <div class="ai-service-card-title">数字人生成</div>
+                        <div class="ai-service-card-desc">定制机器人形象数字人，专属品牌IP打造</div>
+                    </div>
+
+                    <div class="ai-service-card" onclick="showPage('ai-template')">
+                        <div class="ai-service-card-icon template">📦</div>
+                        <div class="ai-service-card-title">爆款模板</div>
+                        <div class="ai-service-card-desc">100+机器人租赁行业模板，快速复用</div>
+                    </div>
+
+                    <div class="ai-service-card" onclick="showPage('ai-distribute')">
+                        <div class="ai-service-card-icon distribute">🚀</div>
+                        <div class="ai-service-card-title">一键分发</div>
+                        <div class="ai-service-card-desc">多平台同步发布，抖音快手小红书全覆盖</div>
+                    </div>
+                </div>
+
+                <!-- Content Stats -->
+                <div class="section-title">
+                    <h2>📊 内容数据看板</h2>
+                </div>
+
+                <div class="stats-dashboard">
+                    <div class="stats-card">
+                        <div class="stats-card-header">
+                            <div class="stats-card-title">本月内容效果</div>
+                            <div class="stats-card-period">2026年3月</div>
+                        </div>
+                        <div class="stats-numbers">
+                            <div class="stats-number-item">
+                                <div class="stats-number-value">156</div>
+                                <div class="stats-number-label">发布视频</div>
+                            </div>
+                            <div class="stats-number-item">
+                                <div class="stats-number-value">328万</div>
+                                <div class="stats-number-label">总播放</div>
+                            </div>
+                            <div class="stats-number-item">
+                                <div class="stats-number-value">2,847</div>
+                                <div class="stats-number-label">获客线索</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Templates Section -->
+                <div class="section-title">
+                    <h2>🎬 热门内容模板</h2>
+                    <div class="more">更多 ></div>
+                </div>
+
+                <div class="template-section">
+                    <div class="template-categories">
+                        <div class="template-category active">全部</div>
+                        <div class="template-category">开业宣传</div>
+                        <div class="template-category">探店种草</div>
+                        <div class="template-category">直播切片</div>
+                        <div class="template-category">客户案例</div>
+                    </div>
+
+                    <div class="template-grid">
+                        <div class="template-card" onclick="useTemplate('opening')">
+                            <div class="template-preview">🎉
+                                <div class="template-badge">热门</div>
+                            </div>
+                            <div class="template-info">
+                                <div class="template-name">开业引流爆款</div>
+                                <div class="template-meta">预计播放10万+</div>
+                            </div>
+                        </div>
+
+                        <div class="template-card" onclick="useTemplate('review')">
+                            <div class="template-preview" style="background: linear-gradient(135deg, #fff8f0, #ffe8d6);">🍜
+                                <div class="template-badge">转化高</div>
+                            </div>
+                            <div class="template-info">
+                                <div class="template-name">探店打卡种草</div>
+                                <div class="template-meta">预计播放5-8万</div>
+                            </div>
+                        </div>
+
+                        <div class="template-card" onclick="useTemplate('live')">
+                            <div class="template-preview" style="background: linear-gradient(135deg, #f0f8ff, #e0f0ff);">📺
+                                <div class="template-badge">直播</div>
+                            </div>
+                            <div class="template-info">
+                                <div class="template-name">直播精彩片段</div>
+                                <div class="template-meta">预计播放3-5万</div>
+                            </div>
+                        </div>
+
+                        <div class="template-card" onclick="useTemplate('case')">
+                            <div class="template-preview" style="background: linear-gradient(135deg, #f5f0ff, #eee0ff);">💼
+                                <div class="template-badge">案例</div>
+                            </div>
+                            <div class="template-info">
+                                <div class="template-name">客户成功案例</div>
+                                <div class="template-meta">预计播放2-4万</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="height: 80px;"></div>
+            </div>
+
+            <!-- ==================== AI SCRIPT GENERATOR PAGE ==================== -->
+            <div class="page" id="page-ai-script">
+                <div class="script-generator-page">
+                    <div class="script-header">
+                        <div class="script-back-btn" onclick="showPage('ai-factory')">←</div>
+                        <div class="script-title">📝 AI脚本生成</div>
+                        <div class="script-subtitle">为机器人租赁商家自动生成推广脚本</div>
+                    </div>
+
+                    <div class="script-form">
+                        <div class="form-group">
+                            <label class="form-label">商家名称</label>
+                            <input type="text" class="form-input" placeholder="例如：杭州XX火锅" id="merchant-name">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">行业类型</label>
+                            <select class="form-select" id="industry-type">
+                                <option value="">请选择行业</option>
+                                <option value="餐饮">餐饮美食</option>
+                                <option value="酒店">酒店住宿</option>
+                                <option value="商场">商场零售</option>
+                                <option value="婚庆">婚庆服务</option>
+                                <option value="展会">展会活动</option>
+                                <option value="教育">教育培训</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">机器人型号</label>
+                            <select class="form-select" id="robot-model">
+                                <option value="">请选择机器人</option>
+                                <option value="g1">宇树G1人形机器人</option>
+                                <option value="walker">优必选Walker X</option>
+                                <option value="go2">宇树Go2机器狗</option>
+                                <option value="pudu">普渡配送机器人</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">使用场景</label>
+                            <div class="script-options">
+                                <div class="script-option" onclick="toggleOption(this)">开业引流</div>
+                                <div class="script-option" onclick="toggleOption(this)">日常探店</div>
+                                <div class="script-option" onclick="toggleOption(this)">活动暖场</div>
+                                <div class="script-option" onclick="toggleOption(this)">产品展示</div>
+                                <div class="script-option" onclick="toggleOption(this)">客户互动</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">核心卖点（选填）</label>
+                            <textarea class="form-textarea" placeholder="例如：全场8折优惠、机器人舞蹈表演、免费合影等" id="selling-points"></textarea>
+                        </div>
+
+                        <button class="generate-btn" onclick="generateScript()">
+                            <span>✨</span>
+                            <span>生成推广脚本</span>
+                        </button>
+
+                        <!-- Generated Content Preview -->
+                        <div class="generated-content" id="generated-script" style="display: none;">
+                            <div class="generated-header">
+                                <div class="generated-title">📝 生成的脚本</div>
+                                <div class="generated-actions">
+                                    <button class="generated-action-btn" onclick="copyScript()">📋 复制</button>
+                                    <button class="generated-action-btn" onclick="editScript()">✏️ 编辑</button>
+                                </div>
+                            </div>
+                            <div class="script-content" id="script-text">
+                                <div class="script-section">
+                                    <div class="script-section-title">【开场】（0-3秒）</div>
+                                    <div>杭州最火火锅店开业啦！看门口这位特殊迎宾——宇树G1机器人正在热情招呼客人！</div>
+                                </div>
+                                <div class="script-section">
+                                    <div class="script-section-title">【亮点展示】（3-15秒）</div>
+                                    <div>🤖 机器人智能迎宾，自动识别客人<br>🎭 精彩舞蹈表演，吸引路人围观<br>📸 免费合影打卡，自带流量属性</div>
+                                </div>
+                                <div class="script-section">
+                                    <div class="script-section-title">【促销信息】（15-25秒）</div>
+                                    <div>开业期间全场8折优惠！还有机器人现场表演等你来看！地址：杭州市西湖区XXX路</div>
+                                </div>
+                                <div class="script-section">
+                                    <div class="script-section-title">【结尾引导】（25-30秒）</div>
+                                    <div>快来打卡吧！点赞关注，了解更多机器人租赁服务！</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== AI LIVE STREAMING PAGE ==================== -->
+            <div class="page" id="page-ai-live">
+                <div class="live-page">
+                    <div class="live-header">
+                        <div class="script-back-btn" onclick="showPage('ai-factory')">←</div>
+                        <div class="script-title">📺 数字人直播</div>
+                        <div class="script-subtitle">7×24小时AI数字人直播带货</div>
+                    </div>
+
+                    <!-- Live Preview -->
+                    <div class="live-preview">
+                        <div class="live-preview-video">
+                            <div class="live-avatar">🤖</div>
+                            <div class="live-badge">🔴 直播中</div>
+                        </div>
+                        <div class="live-info">
+                            <div class="live-title">宇树G1机器人带货直播</div>
+                            <div class="live-stats">
+                                <span>👥 1,234 在线</span>
+                                <span>❤️ 5.6万 点赞</span>
+                                <span>🛒 89 订单</span>
+                            </div>
+                        </div>
+                        <div class="live-controls">
+                            <button class="live-control-btn primary" onclick="startLive()">
+                                <span>▶</span> 开始直播
+                            </button>
+                            <button class="live-control-btn secondary" onclick="configLive()">
+                                <span>⚙️</span> 直播设置
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Live Templates -->
+                    <div class="section-title">
+                        <h2>🎬 直播模板</h2>
+                    </div>
+
+                    <div class="template-section">
+                        <div class="template-grid">
+                            <div class="template-card" onclick="selectLiveTemplate('product')">
+                                <div class="template-preview">📦
+                                    <div class="template-badge">热销</div>
+                                </div>
+                                <div class="template-info">
+                                    <div class="template-name">产品讲解专场</div>
+                                    <div class="template-meta">适合新品发布</div>
+                                </div>
+                            </div>
+
+                            <div class="template-card" onclick="selectLiveTemplate('interactive')">
+                                <div class="template-preview" style="background: linear-gradient(135deg, #fff8f0, #ffe8d6);">🎮
+                                    <div class="template-badge">互动</div>
+                                </div>
+                                <div class="template-info">
+                                    <div class="template-name">互动问答直播</div>
+                                    <div class="template-meta">增强用户粘性</div>
+                                </div>
+                            </div>
+
+                            <div class="template-card" onclick="selectLiveTemplate('show')">
+                                <div class="template-preview" style="background: linear-gradient(135deg, #f0f8ff, #e0f0ff);">🎭
+                                    <div class="template-badge">表演</div>
+                                </div>
+                                <div class="template-info">
+                                    <div class="template-name">机器人表演秀</div>
+                                    <div class="template-meta">展示功能亮点</div>
+                                </div>
+                            </div>
+
+                            <div class="template-card" onclick="selectLiveTemplate('case')">
+                                <div class="template-preview" style="background: linear-gradient(135deg, #f5f0ff, #eee0ff);">💼
+                                    <div class="template-badge">案例</div>
+                                </div>
+                                <div class="template-info">
+                                    <div class="template-name">成功案例分享</div>
+                                    <div class="template-meta">提升信任度</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Features -->
+                    <div class="section-title">
+                        <h2>✨ 直播功能</h2>
+                    </div>
+
+                    <div style="padding: 0 16px 16px;">
+                        <div class="menu-group">
+                            <div class="menu-item">
+                                <div class="menu-icon purple">🤖</div>
+                                <div class="menu-text">AI智能回复</div>
+                                <div class="menu-arrow">›</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-icon blue">🎙️</div>
+                                <div class="menu-text">语音合成</div>
+                                <div class="menu-arrow">›</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-icon orange">📊</div>
+                                <div class="menu-text">实时数据看板</div>
+                                <div class="menu-arrow">›</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-icon green">🛒</div>
+                                <div class="menu-text">自动带货弹窗</div>
+                                <div class="menu-arrow">›</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- ==================== AI DISTRIBUTION PAGE ==================== -->
+            <div class="page" id="page-ai-distribute">
+                <div class="distribution-page">
+                    <div class="distribution-header">
+                        <div class="script-back-btn" onclick="showPage('ai-factory')">←</div>
+                        <div class="script-title">🚀 一键分发</div>
+                        <div class="script-subtitle">多平台同步发布，最大化内容曝光</div>
+                    </div>
+
+                    <!-- Platform Grid -->
+                    <div class="platform-grid">
+                        <div class="platform-item">
+                            <div class="platform-icon" style="background: #000;">🎵</div>
+                            <div class="platform-name">抖音</div>
+                            <div class="platform-status">✓ 已绑定</div>
+                        </div>
+                        <div class="platform-item">
+                            <div class="platform-icon" style="background: #ff6b6b;">🎬</div>
+                            <div class="platform-name">快手</div>
+                            <div class="platform-status">✓ 已绑定</div>
+                        </div>
+                        <div class="platform-item">
+                            <div class="platform-icon" style="background: #ff2442;">📕</div>
+                            <div class="platform-name">小红书</div>
+                            <div class="platform-status">✓ 已绑定</div>
+                        </div>
+                        <div class="platform-item">
+                            <div class="platform-icon" style="background: #07c160;">💬</div>
+                            <div class="platform-name">视频号</div>
+                            <div class="platform-status">✓ 已绑定</div>
+                        </div>
+                        <div class="platform-item">
+                            <div class="platform-icon" style="background: #00a1d6;">📺</div>
+                            <div class="platform-name">B站</div>
+                            <div class="platform-status">✗ 未绑定</div>
+                        </div>
+                        <div class="platform-item">
+                            <div class="platform-icon" style="background: #ff9f43;">🏠</div>
+                            <div class="platform-name">美团</div>
+                            <div class="platform-status">✗ 未绑定</div>
+                        </div>
+                        <div class="platform-item">
+                            <div class="platform-icon" style="background: #00bebd;">🗺️</div>
+                            <div class="platform-name">大众点评</div>
+                            <div class="platform-status">✗ 未绑定</div>
+                        </div>
+                        <div class="platform-item">
+                            <div class="platform-icon" style="background: #4a90e2;">🔍</div>
+                            <div class="platform-name">百度</div>
+                            <div class="platform-status">✗ 未绑定</div>
+                        </div>
+                    </div>
+
+                    <!-- Distribution Settings -->
+                    <div style="padding: 0 16px;">
+                        <div class="stats-card">
+                            <div class="stats-card-header">
+                                <div class="stats-card-title">分发设置</div>
+                            </div>
+                            <div style="margin-bottom: 16px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="font-size: 14px;">自动添加水印</span>
+                                    <div style="width: 44px; height: 24px; background: var(--accent-green); border-radius: 12px; position: relative; cursor: pointer;">
+                                        <div style="width: 20px; height: 20px; background: white; border-radius: 50%; position: absolute; top: 2px; right: 2px;"></div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="font-size: 14px;">智能添加话题标签</span>
+                                    <div style="width: 44px; height: 24px; background: var(--accent-green); border-radius: 12px; position: relative; cursor: pointer;">
+                                        <div style="width: 20px; height: 20px; background: white; border-radius: 50%; position: absolute; top: 2px; right: 2px;"></div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 14px;">定时发布（可选）</span>
+                                    <div style="width: 44px; height: 24px; background: var(--border); border-radius: 12px; position: relative; cursor: pointer;">
+                                        <div style="width: 20px; height: 20px; background: white; border-radius: 50%; position: absolute; top: 2px; left: 2px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- One-click Publish -->
+                    <div class="publish-section">
+                        <button class="publish-btn" onclick="publishToAll()">
+                            <span>🚀</span>
+                            <span>一键发布到所有平台</span>
+                        </button>
+                    </div>
+
+                    <!-- Distribution History -->
+                    <div class="section-title">
+                        <h2>📊 分发记录</h2>
+                    </div>
+
+                    <div style="padding: 0 16px 20px;">
+                        <div class="menu-group">
+                            <div class="menu-item">
+                                <div class="menu-icon blue">🎬</div>
+                                <div class="menu-text">
+                                    <div>杭州火锅店开业视频</div>
+                                    <div style="font-size: 12px; color: var(--text-muted);">发布于 4平台 · 播放量23万</div>
+                                </div>
+                                <div class="menu-arrow">›</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-icon purple">📺</div>
+                                <div class="menu-text">
+                                    <div>宇树G1产品介绍</div>
+                                    <div style="font-size: 12px; color: var(--text-muted);">发布于 3平台 · 播放量15万</div>
+                                </div>
+                                <div class="menu-arrow">›</div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-icon orange">🎭</div>
+                                <div class="menu-text">
+                                    <div>机器人舞蹈表演合集</div>
+                                    <div style="font-size: 12px; color: var(--text-muted);">发布于 5平台 · 播放量8万</div>
+                                </div>
+                                <div class="menu-arrow">›</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- ==================== DETAIL PAGE ==================== -->
             <div class="page" id="page-detail">
                 <div class="detail-header">
                     <div class="detail-back" onclick="showPage('home')">←</div>
@@ -1269,31 +1917,31 @@
                         <div class="date-selector">
                             <div class="date-item">
                                 <div class="date-day">今天</div>
-                                <div class="date-num">29</div>
+                                <div class="date-num">30</div>
                             </div>
                             <div class="date-item active">
                                 <div class="date-day">明天</div>
-                                <div class="date-num">30</div>
-                            </div>
-                            <div class="date-item">
-                                <div class="date-day">周二</div>
                                 <div class="date-num">31</div>
                             </div>
                             <div class="date-item">
-                                <div class="date-day">周三</div>
+                                <div class="date-day">周二</div>
                                 <div class="date-num">01</div>
                             </div>
                             <div class="date-item">
-                                <div class="date-day">周四</div>
+                                <div class="date-day">周三</div>
                                 <div class="date-num">02</div>
                             </div>
                             <div class="date-item">
-                                <div class="date-day">周五</div>
+                                <div class="date-day">周四</div>
                                 <div class="date-num">03</div>
                             </div>
                             <div class="date-item">
-                                <div class="date-day">周六</div>
+                                <div class="date-day">周五</div>
                                 <div class="date-num">04</div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-day">周六</div>
+                                <div class="date-num">05</div>
                             </div>
                         </div>
                     </div>
@@ -1340,104 +1988,7 @@
                 </div>
             </div>
 
-            <!-- AI Factory Page -->
-            <div class="page" id="page-ai">
-                <div class="ai-factory-header">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                        <div class="detail-back" style="position: static; background: rgba(255,255,255,0.2);" onclick="showPage('home')">←</div>
-                    </div>
-                    <div class="ai-factory-title">✨ AI内容工厂</div>
-                    <div class="ai-factory-subtitle">AI驱动，让内容创作更简单</div>
-                </div>
-
-                <div class="ai-tools">
-                    <div class="ai-tool-card">
-                        <div class="ai-tool-icon script">📝</div>
-                        <div class="ai-tool-info">
-                            <div class="ai-tool-name">短视频脚本</div>
-                            <div class="ai-tool-desc">输入商家信息，AI自动生成爆款脚本</div>
-                        </div>
-                        <div class="ai-tool-arrow">›</div>
-                    </div>
-
-                    <div class="ai-tool-card">
-                        <div class="ai-tool-icon clip">🎬</div>
-                        <div class="ai-tool-info">
-                            <div class="ai-tool-name">智能剪辑</div>
-                            <div class="ai-tool-desc">上传素材，AI自动剪辑成片</div>
-                        </div>
-                        <div class="ai-tool-arrow">›</div>
-                    </div>
-
-                    <div class="ai-tool-card">
-                        <div class="ai-tool-icon live">📺</div>
-                        <div class="ai-tool-info">
-                            <div class="ai-tool-name">数字人直播</div>
-                            <div class="ai-tool-desc">7×24小时AI数字人自动直播</div>
-                        </div>
-                        <div class="ai-tool-arrow">›</div>
-                    </div>
-
-                    <div class="ai-tool-card">
-                        <div class="ai-tool-icon template">📦</div>
-                        <div class="ai-tool-info">
-                            <div class="ai-tool-name">爆款模板</div>
-                            <div class="ai-tool-desc">100+行业模板，一键套用</div>
-                        </div>
-                        <div class="ai-tool-arrow">›</div>
-                    </div>
-                </div>
-
-                <div class="template-section">
-                    <div class="section-title" style="padding-left: 0;">
-                        <h2>🎬 热门模板</h2>
-                    </div>
-
-                    <div class="template-categories">
-                        <div class="template-category active">全部</div>
-                        <div class="template-category">餐饮</div>
-                        <div class="template-category">开业</div>
-                        <div class="template-category">展会</div>
-                        <div class="template-category">婚庆</div>
-                        <div class="template-category">活动</div>
-                    </div>
-
-                    <div class="template-grid">
-                        <div class="template-card">
-                            <div class="template-image">🎉</div>
-                            <div class="template-info">
-                                <div class="template-name">开业宣传视频</div>
-                                <div class="template-views">预计播放 5-10万</div>
-                            </div>
-                        </div>
-                        <div class="template-card">
-                            <div class="template-image" style="background: linear-gradient(135deg, #fff8f0, #ffe8d6);">🍜</div>
-                            <div class="template-info">
-                                <div class="template-name">探店打卡视频</div>
-                                <div class="template-views">预计播放 3-8万</div>
-                            </div>
-                        </div>
-                        <div class="template-card">
-                            <div class="template-image" style="background: linear-gradient(135deg, #f0f8ff, #e0f0ff);">🏢</div>
-                            <div class="template-info">
-                                <div class="template-name">产品讲解视频</div>
-                                <div class="template-views">预计播放 2-5万</div>
-                            </div>
-                        </div>
-                        <div class="template-card">
-                            <div class="template-image" style="background: linear-gradient(135deg, #f5f0ff, #eee0ff);">🎊</div>
-                            <div class="template-info">
-                                <div class="template-name">活动预热视频</div>
-                                <div class="template-views">预计播放 3-6万</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="height: 80px;"></div>
-            </div>
-
-            <!-- Profile Page -->
+            <!-- ==================== PROFILE PAGE ==================== -->
             <div class="page" id="page-profile">
                 <div class="profile-header">
                     <div class="profile-user">
@@ -1453,12 +2004,12 @@
                             <div class="profile-stat-label">租赁订单</div>
                         </div>
                         <div class="profile-stat">
-                            <div class="profile-stat-value">5</div>
+                            <div class="profile-stat-value">12</div>
                             <div class="profile-stat-label">AI作品</div>
                         </div>
                         <div class="profile-stat">
-                            <div class="profile-stat-value">50万+</div>
-                            <div class="profile-stat-label">总播放量</div>
+                            <div class="profile-stat-value">156万</div>
+                            <div class="profile-stat-label">内容曝光</div>
                         </div>
                     </div>
                 </div>
@@ -1472,7 +2023,7 @@
                         </div>
                         <div class="menu-item">
                             <div class="menu-icon purple">🎬</div>
-                            <div class="menu-text">我的AI作品</div>
+                            <div class="menu-text">我的AI内容</div>
                             <div class="menu-arrow">›</div>
                         </div>
                         <div class="menu-item">
@@ -1506,6 +2057,52 @@
 
                 <div style="height: 40px;"></div>
             </div>
+
+            <!-- ==================== PLACEHOLDER PAGES ==================== -->
+            <div class="page" id="page-solution">
+                <div style="padding: 100px 20px; text-align: center;">
+                    <div style="font-size: 60px; margin-bottom: 20px;">📋</div>
+                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">场景方案</div>
+                    <div style="font-size: 14px; color: var(--text-secondary);">开发中，敬请期待...</div>
+                    <button onclick="showPage('home')" style="margin-top: 20px; padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 8px;">返回首页</button>
+                </div>
+            </div>
+
+            <div class="page" id="page-partner">
+                <div style="padding: 100px 20px; text-align: center;">
+                    <div style="font-size: 60px; margin-bottom: 20px;">🤝</div>
+                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">加盟合作</div>
+                    <div style="font-size: 14px; color: var(--text-secondary);">开发中，敬请期待...</div>
+                    <button onclick="showPage('home')" style="margin-top: 20px; padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 8px;">返回首页</button>
+                </div>
+            </div>
+
+            <div class="page" id="page-ai-clip">
+                <div style="padding: 100px 20px; text-align: center;">
+                    <div style="font-size: 60px; margin-bottom: 20px;">🎬</div>
+                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">智能剪辑</div>
+                    <div style="font-size: 14px; color: var(--text-secondary);">开发中，敬请期待...</div>
+                    <button onclick="showPage('ai-factory')" style="margin-top: 20px; padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 8px;">返回AI工厂</button>
+                </div>
+            </div>
+
+            <div class="page" id="page-ai-digital">
+                <div style="padding: 100px 20px; text-align: center;">
+                    <div style="font-size: 60px; margin-bottom: 20px;">🤖</div>
+                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">数字人生成</div>
+                    <div style="font-size: 14px; color: var(--text-secondary);">开发中，敬请期待...</div>
+                    <button onclick="showPage('ai-factory')" style="margin-top: 20px; padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 8px;">返回AI工厂</button>
+                </div>
+            </div>
+
+            <div class="page" id="page-ai-template">
+                <div style="padding: 100px 20px; text-align: center;">
+                    <div style="font-size: 60px; margin-bottom: 20px;">📦</div>
+                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">爆款模板库</div>
+                    <div style="font-size: 14px; color: var(--text-secondary);">开发中，敬请期待...</div>
+                    <button onclick="showPage('ai-factory')" style="margin-top: 20px; padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 8px;">返回AI工厂</button>
+                </div>
+            </div>
         </div>
 
         <!-- Tab Bar -->
@@ -1514,15 +2111,15 @@
                 <div class="tab-icon">🏠</div>
                 <div class="tab-text">首页</div>
             </div>
-            <div class="tab-item" onclick="showPage('ai')">
+            <div class="tab-item" onclick="showPage('ai-factory')">
                 <div class="tab-icon">✨</div>
                 <div class="tab-text">AI创作</div>
             </div>
-            <div class="tab-item">
+            <div class="tab-item" onclick="showSuccess('发布功能开发中')">
                 <div class="tab-icon">➕</div>
                 <div class="tab-text">发布</div>
             </div>
-            <div class="tab-item">
+            <div class="tab-item" onclick="showSuccess('消息功能开发中')">
                 <div class="tab-icon">💬</div>
                 <div class="tab-text">消息</div>
             </div>
@@ -1536,33 +2133,95 @@
     <script>
         // Page navigation
         function showPage(pageName) {
-            // Hide all pages
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
             
-            // Show target page
             document.getElementById('page-' + pageName).classList.add('active');
             
-            // Update tab bar
             document.querySelectorAll('.tab-item').forEach((tab, index) => {
                 tab.classList.remove('active');
             });
             
-            // Scroll to top
             document.querySelector('.main').scrollTop = 0;
             
-            // Update active tab based on page
             if (pageName === 'home') {
                 document.querySelectorAll('.tab-item')[0].classList.add('active');
-            } else if (pageName === 'ai') {
+            } else if (pageName === 'ai-factory' || pageName.startsWith('ai-')) {
                 document.querySelectorAll('.tab-item')[1].classList.add('active');
             } else if (pageName === 'profile') {
                 document.querySelectorAll('.tab-item')[4].classList.add('active');
             }
         }
 
-        // Date selector interaction
+        // Script generator functions
+        function toggleOption(element) {
+            element.classList.toggle('active');
+        }
+
+        function generateScript() {
+            const btn = document.querySelector('.generate-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<div class="loading-spinner"></div> <span>生成中...</span>';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                document.getElementById('generated-script').style.display = 'block';
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                showSuccess('脚本生成成功！');
+            }, 1500);
+        }
+
+        function copyScript() {
+            showSuccess('脚本已复制到剪贴板');
+        }
+
+        function editScript() {
+            showSuccess('进入编辑模式');
+        }
+
+        // Template functions
+        function useTemplate(type) {
+            showSuccess(`已选择${type}模板`);
+        }
+
+        // Live streaming functions
+        function startLive() {
+            showSuccess('正在启动直播间...');
+        }
+
+        function configLive() {
+            showSuccess('打开直播设置');
+        }
+
+        function selectLiveTemplate(type) {
+            showSuccess(`已选择${type}模板`);
+        }
+
+        // Distribution functions
+        function publishToAll() {
+            const btn = document.querySelector('.publish-btn');
+            btn.innerHTML = '<div class="loading-spinner" style="border-color: rgba(255,255,255,0.3); border-top-color: white;"></div> <span>发布中...</span>';
+            
+            setTimeout(() => {
+                showSuccess('已成功发布到4个平台！');
+                btn.innerHTML = '<span>🚀</span> <span>一键发布到所有平台</span>';
+            }, 2000);
+        }
+
+        // Success message
+        function showSuccess(msg) {
+            const successMsg = document.getElementById('success-msg');
+            successMsg.textContent = msg;
+            successMsg.classList.add('show');
+            
+            setTimeout(() => {
+                successMsg.classList.remove('show');
+            }, 2000);
+        }
+
+        // Date selector
         document.querySelectorAll('.date-item').forEach(item => {
             item.addEventListener('click', function() {
                 document.querySelectorAll('.date-item').forEach(d => d.classList.remove('active'));
@@ -1570,7 +2229,7 @@
             });
         });
 
-        // Template category interaction
+        // Template category selector
         document.querySelectorAll('.template-category').forEach(cat => {
             cat.addEventListener('click', function() {
                 document.querySelectorAll('.template-category').forEach(c => c.classList.remove('active'));
@@ -1578,35 +2237,8 @@
             });
         });
 
-        // Banner auto-slide
-        let currentBanner = 0;
-        const banners = [
-            { tag: '🎉 限时特惠', title: '1元闪租机器人', subtitle: '新用户首单专享 · 春节活动持续中', bg: 'linear-gradient(135deg, #051C2C 0%, #006BA6 100%)' },
-            { tag: '🎬 AI内容', title: 'AI帮你做爆款视频', subtitle: '智能脚本+自动剪辑，轻松获客', bg: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' },
-            { tag: '🤝 加盟合作', title: '成为城市合伙人', subtitle: '轻资产创业，共享机器人红利', bg: 'linear-gradient(135deg, #D46A00 0%, #ff8c00 100%)' }
-        ];
-
-        function updateBanner() {
-            currentBanner = (currentBanner + 1) % banners.length;
-            const banner = banners[currentBanner];
-            const bannerEl = document.querySelector('.banner');
-            const contentEl = document.querySelector('.banner-content');
-            
-            bannerEl.style.background = banner.bg;
-            contentEl.querySelector('.banner-tag').textContent = banner.tag;
-            contentEl.querySelector('.banner-title').textContent = banner.title;
-            contentEl.querySelector('.banner-subtitle').textContent = banner.subtitle;
-            
-            // Update dots
-            document.querySelectorAll('.dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentBanner);
-            });
-        }
-
-        setInterval(updateBanner, 4000);
-
         // Touch feedback
-        document.querySelectorAll('.robot-card, .action-item, .ai-tool-card, .menu-item').forEach(el => {
+        document.querySelectorAll('.robot-card, .action-item, .ai-service-card, .menu-item, .template-card').forEach(el => {
             el.addEventListener('touchstart', function() {
                 this.style.opacity = '0.7';
             });
@@ -1615,16 +2247,9 @@
             });
         });
 
-        // Prevent default touch behavior for better scroll
-        document.addEventListener('touchmove', function(e) {
-            if (e.target.closest('.case-list') || e.target.closest('.template-categories') || e.target.closest('.date-selector')) {
-                return;
-            }
-        }, { passive: true });
-
-        console.log('🤖 极智租小程序Demo已加载');
-        console.log('📱 功能：首页、机器人详情、AI内容工厂、个人中心');
-        console.log('✨ 特色：AI脚本生成、智能剪辑、数字人直播');
+        console.log('🤖 极智租H5 Demo V2.0 已加载');
+        console.log('✨ 新增功能：AI脚本生成、数字人直播、一键分发');
+        console.log('🎯 B端商家内容营销解决方案');
     </script>
 </body>
 </html>
